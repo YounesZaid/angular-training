@@ -1,6 +1,16 @@
 <div>
   <habit-form (addHabit)="onAddHabit($event)"></habit-form>
   <ul>
-    <habit-item *ngFor="let habit of habits" [habit]="habit"></habit-item>
+    <habit-item
+      *ngFor="let habit of habits | async"
+      [habit]="habit"
+    ></habit-item>
+
+    <!-- 
+      with subscribe  approach
+      <habit-item
+      *ngFor="let habit of habits"
+      [habit]="habit"
+    ></habit-item> -->
   </ul>
 </div>

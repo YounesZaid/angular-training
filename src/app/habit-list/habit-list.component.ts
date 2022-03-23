@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+
+import { HabitService } from '../habit.service';
 
 @Component({
   selector: 'habit-list',
@@ -7,21 +8,25 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./habit-list.component.scss'],
 })
 export class HabitListComponent implements OnInit {
-  public habits: any[] = [
-    { id: 1, title: 'habit 1' },
-    { id: 2, title: 'habit 2' },
-    { id: 3, title: 'habit 3' },
-    { id: 4, title: 'habit 4' },
-    { id: 5, title: 'habit 5' },
-  ];
+  public habits: any = [];
 
-  constructor() {}
+  constructor(private habitService: HabitService) {}
 
-  onAddHabit(habit: any) {
-    const id = this.habits.length + 1;
-    habit.id = id;
-    this.habits.push(habit);
+  ngOnInit(): void {
+    // with subscribe approach
+    // this.habitService.getHabits().subscribe(
+    //   (habits) => {
+    //     this.habits = habits;
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    // async approach
+    this.habits = this.habitService.getHabits();
   }
 
-  ngOnInit(): void {}
+  onAddHabit(habit: any) {
+    this.habitService.addHabit(habit);
+  }
 }
