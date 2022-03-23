@@ -14,19 +14,13 @@ export class HabitListComponent implements OnInit {
     { id: 4, title: 'habit 4' },
     { id: 5, title: 'habit 5' },
   ];
-  public habitForm: any;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.habitForm = formBuilder.group({
-      title: '',
-    });
-  }
+  constructor() {}
 
-  handleSubmit(habit: any) {
+  onAddHabit(habit: any) {
     const id = this.habits.length + 1;
     habit.id = id;
     this.habits.push(habit);
-    this.habitForm.reset();
   }
 
   ngOnInit(): void {}
