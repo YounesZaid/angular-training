@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { HabitService } from '../habit.service';
+import { Habit } from '../interface/habit';
 
 @Component({
   selector: 'habit-list',
@@ -8,7 +10,7 @@ import { HabitService } from '../habit.service';
   styleUrls: ['./habit-list.component.scss'],
 })
 export class HabitListComponent implements OnInit {
-  public habits: any = [];
+  habits!: Observable<Habit[]>;
 
   constructor(private habitService: HabitService) {}
 

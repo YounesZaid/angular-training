@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Habit } from '../interface/habit';
 
 @Component({
   selector: 'habit-item',
@@ -6,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./habit-item.component.scss'],
 })
 export class HabitItemComponent implements OnInit {
-  @Input() habit: any;
+  @Input()
+  habit!: Habit;
   constructor() {}
 
   ngOnInit(): void {}
