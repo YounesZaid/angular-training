@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { HabitService } from '../habit.service';
 import { Habit } from '../interface/habit';
@@ -26,6 +26,9 @@ export class HabitListComponent implements OnInit {
     // );
     // async approach
     this.habits = this.habitService.getHabits();
+
+    // Subscribe to get values edited by angular operators
+    this.habitService.squareOdd().subscribe((x) => console.log('values ', x));
   }
 
   onAddHabit(habit: any) {

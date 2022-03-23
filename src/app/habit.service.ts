@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { Habit } from './interface/habit';
 
 @Injectable({
@@ -23,5 +24,13 @@ export class HabitService {
     const id = this.habits.length + 1;
     habit.id = id;
     this.habits.push(habit);
+  }
+
+  // example of pipe/filter/map operators
+  squareOdd(): Observable<any> {
+    return of(1, 2, 3, 4, 5).pipe(
+      filter((n) => n > 2),
+      map((n) => n * n)
+    );
   }
 }
