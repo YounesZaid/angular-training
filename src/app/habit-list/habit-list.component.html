@@ -1,0 +1,6 @@
+<div>
+  <habit-form (addHabit)="onAddHabit($event)"></habit-form>
+  <ul>
+    <habit-item *ngFor="let habit of habits" [habit]="habit"></habit-item>
+  </ul>
+</div>
