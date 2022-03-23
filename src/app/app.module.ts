@@ -3,10 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HabitListComponent } from './habit-list/habit-list.component';
+import { HabitItemComponent } from './habit-item/habit-item.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HabitListComponent,
+    HabitItemComponent
   ],
   imports: [
     BrowserModule,
