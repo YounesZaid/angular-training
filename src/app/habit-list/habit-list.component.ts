@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+
+import { HabitService } from '../habit.service';
+import { Habit } from '../interface/habit';
 
 @Component({
   selector: 'habit-list',
@@ -7,21 +11,57 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./habit-list.component.scss'],
 })
 export class HabitListComponent implements OnInit {
-  public habits: any[] = [
-    { id: 1, title: 'habit 1' },
-    { id: 2, title: 'habit 2' },
-    { id: 3, title: 'habit 3' },
-    { id: 4, title: 'habit 4' },
-    { id: 5, title: 'habit 5' },
-  ];
+  habits!: Observable<Habit[]>;
 
-  constructor() {}
+  constructor(private habitService: HabitService) {}
 
-  onAddHabit(habit: any) {
-    const id = this.habits.length + 1;
-    habit.id = id;
-    this.habits.push(habit);
+  ngOnInit(): void {
+    // with subscribe approach
+    // this.habitService.getHabits().subscribe(
+    //   (habits) => {
+    //     this.habits = habits;
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+
+    // async approach
+    this.habits = this.habitService.refetch.pipe(
+      switchMap(() => this.habitService.getHabits())
+    );
+
+    // example of tap : log what the original number was
+    of(Math.random())
+      .pipe(
+        tap(console.log),
+        map((n) => (n > 0.5 ? 'big' : 'small'))
+      )
+      .subscribe(console.log);
+
+    // subscribe to get values edited by angular operators
+    this.habitService.squareOdd().subscribe((x) => console.log('values ', x));
   }
 
-  ngOnInit(): void {}
+  onAddHabit(habit: Habit) {
+    this.habitService.addHabit(habit).subscribe(
+      (habit) => {
+        console.log('habit added ', habit);
+      },
+      (error) => {
+        console.log('habit adding error ', error);
+      }
+    );
+  }
+  onDeleteHabit(habit: Habit) {
+    console.log('event', habit);
+    this.habitService.deleteHabit(habit).subscribe(
+      (habit) => {
+        console.log('habit deleted ', habit);
+      },
+      (error) => {
+        console.log('habit deleting error ', error);
+      }
+    );
+  }
 }

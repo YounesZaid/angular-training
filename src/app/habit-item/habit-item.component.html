@@ -1,4 +1,7 @@
 <li>
-  {{ habit.id }}
-  {{ habit.title }}
+  {{ habit._id }}
+  <strong>
+    {{ habit.title }}
+  </strong>
+  <button type="button" (click)="delete(habit)">delete</button>
 </li>

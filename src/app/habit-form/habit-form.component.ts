@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Habit } from '../interface/habit';
 
 @Component({
   selector: 'habit-form',
@@ -16,7 +17,7 @@ export class HabitFormComponent implements OnInit {
     });
   }
 
-  handleSubmit(newHabit: any) {
+  handleSubmit(newHabit: Habit) {
     this.addHabit.emit(newHabit);
     this.habitForm.reset();
   }
