@@ -30,6 +30,13 @@ export class HabitService {
     habit._id = id;
     this.habits.push(habit);
   }
+  deleteHabit(habit: Habit) {
+    const id = habit._id;
+    return this.http.delete(`/api/habit/${id}`);
+    // const id = this.habits.length + 1;
+    // habit._id = id;
+    // this.habits.push(habit);
+  }
 
   // example of pipe/filter/map operators
   squareOdd(): Observable<any> {

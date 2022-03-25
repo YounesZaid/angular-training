@@ -30,13 +30,24 @@ export class HabitListComponent implements OnInit {
     this.habitService.squareOdd().subscribe((x) => console.log('values ', x));
   }
 
-  onAddHabit(habit: any) {
+  onAddHabit(habit: Habit) {
     this.habitService.addHabit(habit).subscribe(
       (habit) => {
         console.log('habit added ', habit);
       },
       (error) => {
         console.log('habit adding error ', error);
+      }
+    );
+  }
+  onDeleteHabit(habit: Habit) {
+    console.log('event', habit);
+    this.habitService.deleteHabit(habit).subscribe(
+      (habit) => {
+        console.log('habit deleted ', habit);
+      },
+      (error) => {
+        console.log('habit deleting error ', error);
       }
     );
   }

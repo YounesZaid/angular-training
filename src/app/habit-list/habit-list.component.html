@@ -4,6 +4,7 @@
     <habit-item
       *ngFor="let habit of habits | async"
       [habit]="habit"
+      (deleteHabit)="onDeleteHabit($event)"
     ></habit-item>
 
     <!-- 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Habit } from '../interface/habit';
 
 @Component({
@@ -9,7 +9,14 @@ import { Habit } from '../interface/habit';
 export class HabitItemComponent implements OnInit {
   @Input()
   habit!: Habit;
+  @Output() deleteHabit = new EventEmitter<Habit>();
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  delete(habit: Habit) {
+    this.deleteHabit.emit(habit);
+    console.log('habit to delete ', habit);
+  }
 }
