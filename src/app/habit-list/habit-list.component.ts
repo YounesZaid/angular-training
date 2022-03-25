@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { HabitService } from '../habit.service';
 import { Habit } from '../interface/habit';
@@ -24,9 +25,21 @@ export class HabitListComponent implements OnInit {
     //     console.log(error);
     //   }
     // );
+
     // async approach
-    this.habits = this.habitService.getHabits();
-    // Subscribe to get values edited by angular operators
+    this.habits = this.habitService.refetch.pipe(
+      switchMap(() => this.habitService.getHabits())
+    );
+
+    // example of tap : log what the original number was
+    of(Math.random())
+      .pipe(
+        tap(console.log),
+        map((n) => (n > 0.5 ? 'big' : 'small'))
+      )
+      .subscribe(console.log);
+
+    // subscribe to get values edited by angular operators
     this.habitService.squareOdd().subscribe((x) => console.log('values ', x));
   }
 
