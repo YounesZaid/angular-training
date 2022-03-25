@@ -1,5 +1,5 @@
 export interface Habit {
-  id: number;
+  _id: number;
   title: string;
   counter?: number;
 }

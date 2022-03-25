@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -8,21 +9,25 @@ import { Habit } from './interface/habit';
 })
 export class HabitService {
   public habits: Habit[] = [
-    { id: 1, title: 'habit 1' },
-    { id: 2, title: 'habit 2' },
-    { id: 3, title: 'habit 3' },
-    { id: 4, title: 'habit 4' },
-    { id: 5, title: 'habit 5' },
+    { _id: 1, title: 'habit 1' },
+    { _id: 2, title: 'habit 2' },
+    { _id: 3, title: 'habit 3' },
+    { _id: 4, title: 'habit 4' },
+    { _id: 5, title: 'habit 5' },
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getHabits(): Observable<Habit[]> {
-    return of(this.habits);
+    // return of(this.habits);
+    return this.http.get<Habit[]>('/api/habit');
   }
   addHabit(habit: Habit) {
+    return this.http.post('/api/habit', {
+      ...habit,
+    });
     const id = this.habits.length + 1;
-    habit.id = id;
+    habit._id = id;
     this.habits.push(habit);
   }
 
