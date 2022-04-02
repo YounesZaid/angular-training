@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Habit } from '../interface/habit';
+import { Habit } from '../../interface/habit';
 
 @Component({
   selector: 'habit-form',
