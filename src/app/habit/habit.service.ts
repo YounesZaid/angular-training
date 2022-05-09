@@ -16,7 +16,7 @@ export class HabitService {
     { _id: 5, title: 'habit 5' },
   ];
 
-  // to refire the getHabits to refresh after adding a habit
+  // to refire the getHabits to refresh after adding or deleting a habit
   private refetchSubject = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {}
