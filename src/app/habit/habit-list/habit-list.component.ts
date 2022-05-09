@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { HabitService } from '../habit.service';
-import { Habit } from '../interface/habit';
+import { Habit } from '../../interface/habit';
 
 @Component({
   selector: 'habit-list',

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-import { Habit } from './interface/habit';
+import { Habit } from '../interface/habit';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class HabitService {
     { _id: 5, title: 'habit 5' },
   ];
 
-  // to refire the getHabits to refresh after adding a habit
+  // to refire the getHabits to refresh after adding or deleting a habit
   private refetchSubject = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {}
